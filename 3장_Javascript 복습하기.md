@@ -231,3 +231,97 @@ const [x, y, , , z] = arr;
 ## 7. 클래스
 
 자바스크립트는 클래스 기반이 아니라 프로토타입 기반으로 동작하지만, 보기 좋게 클래스로 바꾼 것이라고 이해하면 된다.
+
+### 자바스크립트 프로토타입(Prototype) 개념 정리
+
+클래스 기반 언어 처럼 객체를 생성하는 것이 아니라, **프로토타입 객체를 상속하여 새로운 객체를 생성**합니다.
+
+### 프로토타입이란?
+
+자바스크립트에서 모든 객체는 숨겨진 링크( [[prototype]] )를 가지고 있으며, 이 링크는 다른 객체(프로토타입 객체)를 가리킵니다.<br>
+객체가 특정 프로퍼티나 메서드를 찾을 때, 현재 객체에 없으면 프로토타입 체인을 따라 올라가며 찾습니다.
+
+### 정리
+
+- 모든 객체는 **proto** 를 통해 부모 객체(프로토타입)를 참조한다.
+- 함수에는 prototype 속성이 있으며, 생성된 객체의 프로토타입이 된다.
+- 객체가 속성/메서드를 찾을 때, 프로토타입 체인을 따라 검색한다.
+- Object.create(), Object.setPrototypeOf()를 사용해 프로토타입을 설정할 수 있다.
+- class 문법은 내부적으로 프로토타입을 사용하여 동작한다.
+
+### 그래서
+
+함수형으로 코드를 작성하게 되면 어떤 함수가 어떤 클래스 소속인지 보기 쉽고, 상속도 간단해진다.
+클래스형식으로 작성해서 JS는 프로토타입 기반으로 동작한다.
+
+## 8. Promise, async/await
+
+### Promise
+
+간단하게 설명한다면? -> **내용이 실행은 되었지만 결과를 아직 반환하지 않은 객체**
+
+- Then을 붙이면 결과를 반환
+- 실행이 완료되지 않았으면 완료된 후에 Then 내부 함수가 실행됨
+
+- Resolve(성공 리턴값) -> then으로 연결
+- Reject(실패 리턴값) -> catch로 연결
+- Finally 부분은 무조건 실행
+
+### Promise.all(배열) : 여러개의 프로미스를 동시에 실행
+
+- 하나라도 실패하면 catch로
+- allSettled로 실패한 것만 추려낼 수 있음(요즘 많이 사용하는 추세)
+
+### Async/await
+
+```javascript
+// Promise then 지옥 코드
+function findAndSaveUser(Users) {
+  User.findOne({})
+    .then((user) => {
+      user.name = 'kang';
+      return user.save();
+    })
+    .then((user) => {
+      return Users.findOne({gender : 'm'});
+    })
+    .then((user) => {
+      ...(생략)
+    })
+    .catch((err) => {
+      ...
+    })
+}
+```
+
+이런 코드를 async, await으로 축약이 가능하다.
+
+```javascript
+// async, await 적용
+async function findAndSaveUser(Users) {
+  let user = await Users.findOne({});
+  user.name = "zero";
+  user = await user.save();
+  user = await Users.findOne({ gender: "m" });
+  // ... 생략
+}
+```
+
+await이 then 역활을 한다. 코드에서 .then((user))에서 user라는 결과값을 받는다, 그래서 실행순서는 오른쪽에서 왼쪽이라고 보면된다.
+
+<br>
+
+## 9. Map, Set, WeakMap, WeakSet
+
+```javascript
+// Map
+const m = new Map();
+m.set("a", "b"); // Map(1) {'a' => 'b'}
+m.set("c", "d"); // Map(2) {'a' => 'b', 'c' => 'd'}
+
+m.get("a"); // 'b'
+```
+
+## 10. 널 병합, 옵셔널 체이닝
+
+## 11. 프런트엔드 자바스크립트
