@@ -178,6 +178,8 @@ import 함수를 사용하여 사용할 수 있다. import 함수는 promise라�
 
 # 4. 노드 내장 객체
 
+내장 객체 같은 경우는 굳이 외울 필요 없음. 주로 사용하는것만 설명함.
+
 ## 1. global
 
 브라우저의 window와 같은 전역객체이다. 전역객체이기 때문에 모든 파일에서 접근이 가능하다. 또한 global을 생락할 수 도 있다.
@@ -277,3 +279,17 @@ console.timeEnd("전체시간");
 ## 3. 타이머
 
 setTimeout, setInterval, setImmdiate는 노드에서 window 대신 global 객체에 있습니다. 웹을 했다면 setTimeout, setInterval 두개는 익숙 할 겁니다.
+
+### setTimeout(콜백 함수, 밀리초)
+
+주어진 밀리초(1,000분의 1초) 이후에 콜백 함수를 실행합니다.
+
+### setInterval(콜백 함수, 밀리초)
+
+주어진 밀리초마다 콜백 함수를 반복 실행합니다.
+
+### setImmediate(콜백 함수)
+
+콜백함수를 즉시 실행합니다.
+
+이 모든 타이머함수들은 <span style="color : yellow;">**clear함수(아이디)**</span> 로 타이머를 취소할 수 있습니다.
