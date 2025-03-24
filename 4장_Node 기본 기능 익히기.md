@@ -146,7 +146,36 @@ export default checkOddOrEven;
 
 기존에 comminJS 모듈에서는 reqiure를 사용해서 가져왔지만 es 모듈에서는 import를 사용해서 모듈을 가져옵니다.
 
-<<<<<<< HEAD
+### 다이나믹 임포트
+
+```javascript
+// dynamic.js
+if (a) {
+  require("./func");
+}
+console.log("성공"); // 성공
+```
+
+이렇게 조건부로 모듈을 불러오는 것을 다이내믹 임포트라고 한다.
+하지만 조건문에서 impor를 사용해서 모듈을 부르는것은 불가능하다.
+import 문은 항상 최상단에 존재해야한다.
+
+그렇지만 import로 사용할 수 가 있다.
+
+```javascript
+// dynamic.js
+const a = true;
+if (a) {
+  const m1 = await import("./func.mjs");
+  console.log(m1); //
+  const m2 = await import("./var.mjs");
+  console.log(m2);
+}
+```
+
+import 함수를 사용하여 사용할 수 있다. import 함수는 promise라서 await를 사용해주어야한다.
+결과에서 default에 담겨서 들어오는건 func.mjs에서 export default에 담아서 export 를 했지 때문이다.
+
 # 4. 노드 내장 객체
 
 ## 1. global
@@ -248,34 +277,3 @@ console.timeEnd("전체시간");
 ## 3. 타이머
 
 setTimeout, setInterval, setImmdiate는 노드에서 window 대신 global 객체에 있습니다. 웹을 했다면 setTimeout, setInterval 두개는 익숙 할 겁니다.
-=======
-### 다이나믹 임포트
-
-```javascript
-// dynamic.js
-if (a) {
-  require("./func");
-}
-console.log("성공"); // 성공
-```
-
-이렇게 조건부로 모듈을 불러오는 것을 다이내믹 임포트라고 한다.
-하지만 조건문에서 impor를 사용해서 모듈을 부르는것은 불가능하다.
-import 문은 항상 최상단에 존재해야한다.
-
-그렇지만 import로 사용할 수 가 있다.
-
-```javascript
-// dynamic.js
-const a = true;
-if (a) {
-  const m1 = await import("./func.mjs");
-  console.log(m1); //
-  const m2 = await import("./var.mjs");
-  console.log(m2);
-}
-```
-
-import 함수를 사용하여 사용할 수 있다. import 함수는 promise라서 await를 사용해주어야한다.
-결과에서 default에 담겨서 들어오는건 func.mjs에서 export default에 담아서 export 를 했지 때문이다.
->>>>>>> 7eb0bb6e2c0519a1eee71a6e8bbd317304523949
