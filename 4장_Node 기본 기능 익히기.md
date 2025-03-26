@@ -293,3 +293,43 @@ setTimeout, setInterval, setImmdiate는 노드에서 window 대신 global 객체
 콜백함수를 즉시 실행합니다.
 
 이 모든 타이머함수들은 <span style="color : yellow;">**clear함수(아이디)**</span> 로 타이머를 취소할 수 있습니다.
+
+<br>
+
+# 4. \_ _filename, _ \_dirname
+
+> 언더바 2개는 Double underscore라고 불리며 줄여서 '던더' 라고 많이들 부름 ㅋㅋ
+
+노드에서는 파일 사이에 모듈 관계가 있는 경우가 많으므로 때로는 현재 파일의 경로나 파일명을 알아야합니다. 노드는 **filename, **dirname이라는 키워드로 경로에 대한 정보를 제공합니다.
+
+```javascript
+console.log(__filename);
+console.log(__dirname);
+```
+
+```bash
+$node filename.js
+C:\Users\kangs\filename.js
+C:\Users\kangs
+```
+
+# 5. 프로세스
+
+노드는 운영체제에 접근할 수 있다.
+
+# 6. OS
+
+os.cups() -> cpu 에 대한 정보
+cpu 코어의 개수를 알 수 있다.
+
+# 7. URL, DNS module
+
+WHATWG 웹표준을 정하는 단체
+최근에는 WHATWG 표준을 사용
+
+URLSearchParams는 이터레이터 객체이다. -> 이터레이터에 대해 한번 보는게 좋을듯
+쿼리스트링을 요즘엔 서치파람을 더 많이 쓴다 서치파람만 보면 될듯
+
+# 8. crypto 와 util
+
+crypto 암호화
