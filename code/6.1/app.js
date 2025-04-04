@@ -21,7 +21,23 @@ app.get("/", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("Hello Express");
+  //res.send("Hello Express");
+  // json 형식으로 보내기
+
+  // 원래방식
+  // res.writeHead(200, { "Content-Type": "application/json" });
+  // res.end(
+  //   JSON.stringify({
+  //     name: "홍길동",
+  //     age: 20,
+  //   })
+  // );
+
+  // express 방식
+  res.json({
+    name: "홍길동",
+    age: 20,
+  });
 });
 
 app.post("/", (req, res) => {
