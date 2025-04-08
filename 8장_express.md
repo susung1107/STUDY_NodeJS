@@ -170,3 +170,25 @@ router.route('/abc').get(req,res) => {
   res.send('POST /abc');
 });
 ```
+
+# 템플릿 엔진
+
+### html의 정적인 단점을 개선
+
+- 동적인 페이지 작성가능
+- 반복문, 조건문, 변수 등을 사용할 수 있음
+
+## 넌적스
+
+### 기존 Html 문법과 거의 동일한듯함.
+
+## Pug(구 Jade)
+
+### 문법이 Ruby와 비슷해 코드 양이 많이 줄어듦.
+
+코드는 상단에 port와 morgan 사이에 추가 해주면 된다.
+
+```javascript
+app.set("views", path.join(__dirname, "views"));
+app.set("views engine", "pug");
+```
