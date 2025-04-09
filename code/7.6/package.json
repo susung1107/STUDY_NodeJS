@@ -1,0 +1,23 @@
+{
+  "name": "sequlize_example",
+  "version": "1.0.0",
+  "description": "시퀄라이즈 연습용",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^5.1.0",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.14.0",
+    "nunjucks": "^3.2.4",
+    "sequelize": "^6.37.7",
+    "sequelize-cli": "^6.6.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
