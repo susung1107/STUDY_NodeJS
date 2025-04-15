@@ -40,6 +40,12 @@ class User extends Sequelize.Model {
       }
     );
   }
+
+  static associate(db) {
+    // foreignKey: 외래키 이름, sourceKey: 참조할 속성
+    // 직역해서 읽으면 이해하기가 쉽다 : 사용자는 댓글을 여러개 가지고 있다.
+    db.User.hasMany(db.Comment, { foreignKey: "commenter", sourceKey: "id" });
+  }
 }
 
 module.exports = User;
