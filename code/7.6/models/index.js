@@ -1,23 +1,22 @@
-const Sequelize = require("sequelize");
-const User = require("./user");
+const Sequelize = require('sequelize');
+const User = require('./user');
+const Comment = require('./comment');
 
-const env = process.env.NODE_ENV || "development";
-const config = require("../config/config")[env];
+const env = process.env.NODE_ENV || 'development';
+const config = require('../config/config')[env];
 const db = {};
 
-// 생성자라서 여러개의 데이터베이스를 연결할 수 있음
-const sequelize = new Sequelize(
-  config.database,
-  config.username,
-  config.password,
-  config
-);
+const sequelize = new Sequelize(config.database, config.username, config.password, config);
 
 db.sequelize = sequelize;
 
 db.User = User;
+db.Comment = Comment;
 
-User.init(sequelize);
+User.initiate(sequelize);
+Comment.initiate(sequelize);
+
 User.associate(db);
+Comment.associate(db);
 
 module.exports = db;

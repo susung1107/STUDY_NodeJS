@@ -1,51 +1,45 @@
-const { Sequelize } = require("sequelize");
+const Sequelize = require('sequelize');
 
 class User extends Sequelize.Model {
   static initiate(sequelize) {
-    User.init(
-      {
-        name: {
-          type: Sequelize.STRING(20),
-          allowNull: false,
-          unique: true,
-        },
-        age: {
-          type: Sequelize.TINYINT.UNSIGNED,
-          allowNull: false,
-        },
-        married: {
-          type: Sequelize.BOOLEAN,
-          allowNull: false,
-        },
-        comment: {
-          type: Sequelize.TEXT,
-          allowNull: true,
-        },
-        created_at: {
-          type: Sequelize.DATE, // DATETIME, MySQL DATE -> Sequelize DateOnly
-          allowNull: false,
-          defaultValue: Sequelize.NOW,
-        },
-        // createdAt, updatedAt, deletedAt: true // soft delete
+    User.init({
+      name: {
+        type: Sequelize.STRING(20),
+        allowNull: false,
+        unique: true,
       },
-      {
-        sequelize,
-        timestamps: false, // 시퀄라이즈에서 시간을 자동으로 추가할지 여부
-        underscored: false, // 카멜 케이스를 스네이크 케이스로 변환할지 여부
-        modelName: "User", // 모델 이름
-        tableName: "users", // 테이블 이름
-        paranoid: false, // 삭제 시 실제 삭제되지 않고 삭제 시간을 기록할지 여부
-        charset: "utf8mb4",
-        collate: "utf8mb4_general_ci",
-      }
-    );
+      age: {
+        type: Sequelize.INTEGER.UNSIGNED,
+        allowNull: false,
+      },
+      married: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
+      comment: {
+        type: Sequelize.TEXT,
+        allowNull: true,
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.NOW,
+      },
+    }, {
+      sequelize,
+      timestamps: false,
+      underscored: false,
+      modelName: 'User',
+      tableName: 'users',
+      paranoid: false,
+      charset: 'utf8',
+      collate: 'utf8_general_ci',
+    });
   }
 
   static associate(db) {
-    // foreignKey: 외래키 이름, sourceKey: 참조할 속성
-    // 직역해서 읽으면 이해하기가 쉽다 : 사용자는 댓글을 여러개 가지고 있다.
-    db.User.hasMany(db.Comment, { foreignKey: "commenter", sourceKey: "id" });
+    db.User.hasMany(db.Comment, { foreignKey: 'commenter', sourceKey: 'id' });
   }
-}
+};
 
 module.exports = User;

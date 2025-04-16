@@ -13,6 +13,7 @@ nunjucks.configure("views", {
   watch: true,
 });
 
+// sync가 되는순간 데이터베이스에 테이블이 생성이 된다.
 sequelize
   .sync({ force: true })
   .then(() => {
