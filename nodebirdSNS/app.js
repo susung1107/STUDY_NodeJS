@@ -11,6 +11,7 @@ const { sequelize } = require("./models");
 
 dotenv.config();
 const pageRouter = require("./routes/page");
+const authRouter = require("./routes/auth");
 const passportConfig = require("./passport");
 
 const app = express();
@@ -48,10 +49,11 @@ app.use(
   })
 );
 // 항상 세션 미들웨어 아래에 있어야 함
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.initialize()); // req.user, req.login, req.logout, req.isAuthenticated 등을 사용할 수 있게 함
+app.use(passport.session()); // connect.sid 라는 이름으로 세션 쿠키가 브라우저로 전송
 
 app.use("/", pageRouter);
+app.use("/auth", authRouter);
 
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);

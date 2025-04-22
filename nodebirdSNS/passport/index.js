@@ -5,7 +5,7 @@ const User = require("../models/user");
 
 module.exports = () => {
   passport.serializeUser((user, done) => {
-    done(null, user.id);
+    done(null, user.id); // user id만 추출
   });
   passport.deserializeUser((id, done) => {
     User.findOne({ where: { id } })

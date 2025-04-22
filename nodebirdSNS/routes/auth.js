@@ -1,12 +1,16 @@
 const express = require("express");
-const router = express.Router();
 const passport = require("passport");
+const { isLoggedIn, isNotLoggedIn } = require("../middlewares");
+const { join, login, logout } = require("../controllers/auth");
+const router = express.Router();
 
-router.post(
-  "/auth/login",
-  passport.authenticate("local", () => {
-    req.login();
-  })
-);
+// POST /auth/join
+router.post("/join", isNotLoggedIn, join);
+
+// POST /auth/login
+router.post("/login", isNotLoggedIn, login);
+
+// GET /auth/logout
+router.get("/logout", isLoggedIn, logout);
 
 module.exports = router;
