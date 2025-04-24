@@ -1,6 +1,8 @@
 const passport = require("passport");
 const { Strategy: KakaoStrategy } = require("passport-kakao");
+
 const User = require("../models/user");
+
 module.exports = () => {
   passport.use(
     new KakaoStrategy(
@@ -33,7 +35,6 @@ module.exports = () => {
           console.error(error);
           done(error);
         }
-        done();
       }
     )
   );
