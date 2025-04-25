@@ -32,6 +32,6 @@ router.post("/img", isLoggedIn, upload.single("img"), afterUploadImage);
 
 // 설정이 다르면 multer를 새로 생성해야 함
 const upload2 = multer();
-router.post("/", isLoggedIn, uploadPost);
+router.post("/", isLoggedIn, upload2.none(), uploadPost);
 
 module.exports = router;
