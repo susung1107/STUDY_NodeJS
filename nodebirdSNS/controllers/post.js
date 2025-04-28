@@ -2,7 +2,7 @@ const Post = require("../models/post");
 const Hashtag = require("../models/hashtag");
 
 exports.afterUploadImage = (req, res) => {
-  console.log(req.file);
+  console.log("afterUploadImage에 req.file : ", req.file);
   res.json({ url: `/img/${req.file.filename}` });
 };
 
