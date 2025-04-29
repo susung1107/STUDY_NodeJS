@@ -12,6 +12,7 @@ const { sequelize } = require("./models");
 dotenv.config();
 const authRouter = require("./routes/auth");
 const indexRouter = require("./routes/index");
+const v1Router = require("./routes/v1");
 
 const passportConfig = require("./passport");
 
@@ -25,7 +26,7 @@ nunjucks.configure("views", {
 });
 
 sequelize
-  .sync({ force: true }) // 개발 환경에서만 사용, 실제 서비스에서는 사용하면 안됨, 테이블 재생성
+  .sync({ force: false }) // 개발 환경에서만 사용, 실제 서비스에서는 사용하면 안됨, 테이블 재생성
   .then(() => {
     console.log("데이터베이스 연결 성공");
   })
@@ -55,7 +56,7 @@ app.use(passport.session()); // connect.sid 라는 이름으로 세션 쿠키가
 
 app.use("/auth", authRouter);
 app.use("/", indexRouter);
-
+app.use("/v1", v1Router);
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
   error.status = 404;
