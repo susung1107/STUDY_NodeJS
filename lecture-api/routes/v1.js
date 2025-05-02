@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { verifyToken } = require("../middlewares");
+const { verifyToken, deprecated } = require("../middlewares");
 const {
   createToken,
   tokenTest,
@@ -9,6 +9,7 @@ const {
 } = require("../controllers/v1");
 
 const router = express.Router();
+router.use(deprecated); // 모든 라우터에 적용
 
 // POST /v1/token
 router.post("/token", createToken);

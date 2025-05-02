@@ -52,7 +52,7 @@ const request = async (req, api) => {
       delete req.session.jwt;
       return request(req, api); // 토큰 만료 시 토큰 삭제 후 다시 요청
     }
-    throw error.response;
+    return error.response;
   }
 };
 

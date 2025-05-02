@@ -13,6 +13,7 @@ dotenv.config();
 const authRouter = require("./routes/auth");
 const indexRouter = require("./routes/index");
 const v1 = require("./routes/v1");
+const v2 = require("./routes/v2");
 
 const passportConfig = require("./passport");
 
@@ -55,6 +56,7 @@ app.use(passport.initialize()); // req.user, req.login, req.logout, req.isAuthen
 app.use(passport.session()); // connect.sid 라는 이름으로 세션 쿠키가 브라우저로 전송
 
 app.use("/v1", v1);
+app.use("/v2", v2);
 app.use("/auth", authRouter);
 app.use("/", indexRouter);
 
