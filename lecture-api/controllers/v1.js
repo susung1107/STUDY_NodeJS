@@ -96,3 +96,46 @@ exports.getPostsByHashtag = async (req, res) => {
     });
   }
 };
+
+exports.getMyFollowers = async (req, res) => {
+  try {
+    const user = await User.findOne({
+      where: { id: req.params.id },
+    });
+
+    const followers = await user.getFollowers();
+
+    console.log("followers : ", followers);
+    return res.json({
+      code: 200,
+      payload: followers,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      code: 500,
+      message: "서버 에러",
+    });
+  }
+};
+
+exports.getMyFollowings = async (req, res) => {
+  try {
+    const user = await User.findOne({
+      where: { id: req.params.id },
+    });
+
+    const followings = await user.getFollowings();
+
+    return res.json({
+      code: 200,
+      payload: followings,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      code: 500,
+      message: "서버 에러",
+    });
+  }
+};

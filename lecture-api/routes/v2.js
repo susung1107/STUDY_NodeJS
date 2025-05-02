@@ -11,7 +11,6 @@ const {
   getMyPosts,
   getPostsByHashtag,
 } = require("../controllers/v2");
-const cors = require("cors");
 
 const router = express.Router();
 
