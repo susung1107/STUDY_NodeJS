@@ -6,17 +6,17 @@
     <title>GIF 채팅방</title>
   </head>
   <body>
+    <script src="/socket.io/socket.io.js"></script>
     <script>
-      const webSocket = new WebSocket("ws://localhost:8005");
+      const socket = io.connect("http://localhost:8005", {
+        path: "/socket.io",
+        transports: ["websocket"], // polling 방식 사용 안함
+      });
 
-      webSocket.onopen = function () {
-        console.log("서버 연결 완료");
-      };
-
-      webSocket.onmessage = function (event) {
-        console.log(event.data);
-        webSocket.send("클라이언트에서 서버로 답장를 보냄");
-      };
+      socket.on("news", (data) => {
+        console.log(data);
+        socket.emit("reply", "Hello Node.js");
+      });
     </script>
   </body>
 </html>
