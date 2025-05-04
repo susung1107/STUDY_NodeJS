@@ -1,0 +1,25 @@
+{
+  "name": "gifchat",
+  "description": "gif 실시간 채팅",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "susung1107",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "morgan": "^1.10.0",
+    "nunjucks": "^3.2.4",
+    "ws": "^8.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

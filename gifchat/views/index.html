@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GIF 채팅방</title>
+  </head>
+  <body>
+    <script>
+      const webSocket = new WebSocket("ws://localhost:8005");
+
+      webSocket.onopen = function () {
+        console.log("서버 연결 완료");
+      };
+
+      webSocket.onmessage = function (event) {
+        console.log(event.data);
+        webSocket.send("클라이언트에서 서버로 답장를 보냄");
+      };
+    </script>
+  </body>
+</html>
