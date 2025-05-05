@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const nunjucks = require("nunjucks");
 const dotenv = require("dotenv");
+const connect = require("./schema");
 
 dotenv.config();
 
@@ -18,6 +19,8 @@ nunjucks.configure("views", {
   express: app,
   watch: true,
 });
+connect();
+
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
