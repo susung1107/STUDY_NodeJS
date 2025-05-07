@@ -1,35 +1,27 @@
 const SocketIO = require("socket.io");
 
 // app.js에서 서버를 생성해서 전달해준다.
-module.exports = (server) => {
+module.exports = (server, app) => {
   // 실제로 웹소켓 서버와 express 서버를 연결해준다.
-  const io = SocketIO(server, { path: "/socket.io" });
+  const io = SocketIO(server);
+  app.set("io", io); // 서버에 접속한 클라이언트를 저장해두는 공간
 
-  // 첫 웹소켓 연결 시 시작되는 부분
-  io.on("connection", (socket) => {
-    const req = socket.request;
+  // 네임스페이스 생성
+  const room = io.of("/room");
+  const chat = io.of("/chat");
 
-    // 클라이언트의 ip 주소를 알아내는 방법
-    const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
-    console.log("새로운 클라이언트 접속 : ", ip, socket.id);
-
-    // ws close와 대응됨
+  // 네임스페이스 접속 시 실행되는 이벤트
+  room.on("connection", (socket) => {
+    console.log("room 네임스페이스 접속");
     socket.on("disconnect", () => {
-      console.log("클라이언트 접속 해제 :", ip, socket.id);
-      clearInterval(socket.interval);
+      console.log("room 네임스페이스 접속 해제");
     });
+  });
 
-    socket.on("reply", (data) => {
-      console.log(data);
+  chat.on("connection", (socket) => {
+    console.log("chat 네임스페이스 접속");
+    socket.on("disconnect", () => {
+      console.log("chat 네임스페이스 접속 해제");
     });
-
-    // error
-    socket.on("error", console.error);
-
-    // 3초 마다 클라이언트에게 메시지 보내기
-    socket.interval = setInterval(() => {
-      // emit('키', '데이터')
-      socket.emit("news", "Hello Socket.IO");
-    }, 3000);
   });
 };
